@@ -1,5 +1,4 @@
 import json
-from datetime import datetime
 from typing import AsyncIterator, Any
 
 import scrapy
@@ -9,12 +8,11 @@ class ScrapyMiddlewareTestSpider(scrapy.Spider):
     name = "ScrapyMiddlewareTest"
     allowed_domains = ["127.0.0.1"]
 
-    async def start(self):
+    async def start(self) -> AsyncIterator[Any]:
         # 发起第一个请求
         yield scrapy.Request(
             url="http://127.0.0.1:8000/verify",
             method="GET",
-            headers={"request_time": datetime.now().strftime('%Y-%m-%d %H:%M:%S')},
             callback=self.parse,
             dont_filter=True,
         )
@@ -26,7 +24,6 @@ class ScrapyMiddlewareTestSpider(scrapy.Spider):
         yield scrapy.Request(
             url="http://127.0.0.1:8000/verify",
             method="GET",
-            headers={"request_time": datetime.now().strftime('%Y-%m-%d %H:%M:%S')},
             callback=self.parse,
             dont_filter=True,
         )

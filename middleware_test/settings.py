@@ -5,6 +5,10 @@ import logging
 import scrapy
 from colorlog import ColoredFormatter
 
+DOWNLOADER_MIDDLEWARES = {
+    "middleware_test.middlewares.AddRequestTimeMiddleware": 100,
+}
+
 _get_handler = copy.copy(scrapy.utils.log._get_handler)
 
 # 格式化输出到文件的日志

@@ -2,6 +2,7 @@
 #
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
+from datetime import datetime
 
 from scrapy import signals
 
@@ -98,3 +99,9 @@ class MiddlewareTestDownloaderMiddleware:
 
     def spider_opened(self, spider):
         spider.logger.info("Spider opened: %s" % spider.name)
+
+
+class AddRequestTimeMiddleware:
+
+    def process_request(self, request, spider):
+        request.headers['request_time'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
